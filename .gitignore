@@ -1,0 +1,7 @@
+.terraform/
+.aws/
+
+*.ftstate
+*.ftstate.backup
+*.lock.hcl
+
