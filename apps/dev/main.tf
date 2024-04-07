@@ -11,12 +11,12 @@ module "load_balanecr" {
     name = "dstolarek-tg"
   }
 
-  vpc_id = "vpc-005d50ddb18cefa89"
+  vpc_id = "vpc-005d50ddb18cefa89" # Read it from data-source - filter by name
 
   lt = {
     name        = "dstolarek-launch-template"
     description = "dstolarek launch template"
-    user_data   = "user_data.sh"
+    user_data   = filebase64("./templates/user_data.sh")
     public      = true
     subnet_id   = "subnet-0114fcddfcc500f84" # From the infra/dev result
     sg          = ["sg-0b6fcdb09f37eb537"]   # From the infra/dev result

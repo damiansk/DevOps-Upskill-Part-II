@@ -1,3 +1,4 @@
+// module
 resource "aws_lb" "lb" {
   name               = var.lb.name
   internal           = var.lb.internal
@@ -31,12 +32,18 @@ resource "aws_lb_listener" "lb_listener" {
   }
 }
 
+// module
 resource "aws_launch_template" "lt" {
-  name_prefix   = "${var.lt.name}_"
-  description   = var.lt.description
+  name_prefix = "${var.lt.name}_"
+  description = var.lt.description
+  # Better to use data source to find latest imgae
+  # or define default with data source as a fallback
   image_id      = "ami-0c101f26f147fa7fd" # Amazon Linux 2023 AMI
-  instance_type = "t2.micro"
-  user_data     = filebase64(var.lt.user_data)
+  instance_type = "t2.micro"              # From variable with default
+  # Add template folder - at root level
+  # Read file from template
+  # Pass template content as a text
+  user_data = var.lt.user_data
 
   network_interfaces {
     associate_public_ip_address = var.lt.public
@@ -52,6 +59,7 @@ resource "aws_launch_template" "lt" {
   }
 }
 
+// module
 resource "aws_autoscaling_group" "ag" {
   name             = var.asg.name
   desired_capacity = 2
@@ -66,3 +74,6 @@ resource "aws_autoscaling_group" "ag" {
     version = aws_launch_template.lt.latest_version
   }
 }
+
+
+// Add main module (eg. application) which will create all from above
