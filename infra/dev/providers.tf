@@ -8,9 +8,9 @@ terraform {
 
   backend "s3" {
     bucket         = "dstolarek-upskill-devops-terraform-s3-state"
-    key            = "state/terraform.tfstate"
+    key            = "state/infra/dev/terraform.tfstate"
     region         = "us-east-1"
-    dynamodb_table = "dstolarek-terraform-s3-dynamodb"
+    dynamodb_table = "dstolarek-upskill-devops-terraform-s3-dynamodb"
     encrypt        = true
     profile        = "dstolarek-upskill-devops"
   }
@@ -19,4 +19,12 @@ terraform {
 provider "aws" {
   region  = "us-east-1"
   profile = "dstolarek-upskill-devops"
+
+  default_tags {
+    tags = {
+      Environment = "Dev"
+      Owner       = "dstolarek"
+      Application = "DevOps Terraform Upskill"
+    }
+  }
 }

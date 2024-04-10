@@ -1,9 +1,9 @@
 output "nat_gw" {
-  value = aws_nat_gateway.gw
+  value = aws_nat_gateway.main
 }
 
 output "nat_gw_id" {
-  value = aws_nat_gateway.gw.id
+  value = aws_nat_gateway.main.id
 }
 
 output "rt_id" {

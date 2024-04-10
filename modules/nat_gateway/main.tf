@@ -1,11 +1,11 @@
-resource "aws_eip" "nat_gw_eip" {
+resource "aws_eip" "main" {
   tags = {
     Name = "${var.tag_name}-nat-eip"
   }
 }
 
-resource "aws_nat_gateway" "gw" {
-  allocation_id = aws_eip.nat_gw_eip.id
+resource "aws_nat_gateway" "main" {
+  allocation_id = aws_eip.main.id
   subnet_id     = var.subnet_id
 
   tags = {
