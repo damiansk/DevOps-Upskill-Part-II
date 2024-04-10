@@ -1,13 +1,11 @@
 module "network" {
   source = "../network"
 
-  vpc = {
-    cidr_block = var.networking.network.vpc.cidr_block
-    tags = {
-      Name = var.networking.network.vpc.resource_name
-    }
+  config = {
+    cidr_block = var.networking.network.cidr_block
+    name       = var.networking.network.name
+    subnets    = var.networking.network.subnets
   }
-  subnets = var.networking.network.subnets
 }
 
 module "igw" {
@@ -16,7 +14,7 @@ module "igw" {
   vpc_id = module.network.vpc_id
   igw = {
     tags = {
-      Name = var.networking.network.igw.resource_name
+      Name = var.networking.igw.resource_name
     }
   }
   rt = {
@@ -25,9 +23,11 @@ module "igw" {
       gateway_id = module.igw.igw_id
     }]
     tags = {
-      Name = "${var.networking.network.igw.resource_name}-public"
+      Name = "${var.networking.network.name}-public"
     }
   }
+
+  depends_on = [module.network]
 }
 
 module "nat" {
@@ -35,7 +35,7 @@ module "nat" {
 
   vpc_id    = module.network.vpc_id
   subnet_id = module.network.subnets.public-1.id
-  tag_name  = var.networking.network.nat.resource_name
+  tag_name  = "${var.networking.network.name}-nat-eip"
 
   rt = {
     routes = [{
@@ -43,11 +43,11 @@ module "nat" {
       gateway_id = module.nat.nat_gw_id
     }]
     tags = {
-      Name = "${var.networking.network.nat.resource_name}-private"
+      Name = "${var.networking.network.name}-private"
     }
   }
 
-  depends_on = [module.igw.igw_id]
+  depends_on = [module.network, module.igw.igw_id]
 }
 
 module "associate_rt_subnet" {

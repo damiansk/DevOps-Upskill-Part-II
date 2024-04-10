@@ -3,6 +3,8 @@ module "networking" {
 
   networking = {
     network         = var.networking.network
+    igw             = var.networking.igw
+    nat             = var.networking.nat
     security_groups = var.networking.security_groups
   }
 }

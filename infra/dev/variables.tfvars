@@ -1,9 +1,7 @@
 networking = {
   network = {
-    vpc = {
-      resource_name = "dstolarek-upskill-vpc"
-      cidr_block    = "10.0.0.0/16"
-    }
+    name       = "dstolarek-upskill-vpc"
+    cidr_block = "10.0.0.0/16"
     subnets = [
       {
         name              = "public-1"
@@ -38,13 +36,14 @@ networking = {
         }
       },
     ],
-    igw = {
-      resource_name = "igw"
-    }
-    nat = {
-      resource_name = "nat"
-    }
+  },
+  igw = {
+    resource_name = "igw"
   }
+  nat = {
+    resource_name = "nat"
+  }
+
 
   security_groups = {
     public = {

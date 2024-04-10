@@ -1,7 +1,7 @@
-resource "aws_subnet" "subnet" {
-  vpc_id            = var.vpc_id
-  cidr_block        = var.cidr_block
-  availability_zone = var.availability_zone
+resource "aws_subnet" "main" {
+  vpc_id            = var.config.vpc_id
+  cidr_block        = var.config.cidr_block
+  availability_zone = var.config.availability_zone
 
-  tags = var.tags
+  tags = var.config.tags
 }

@@ -1,6 +1,6 @@
 resource "aws_eip" "main" {
   tags = {
-    Name = "${var.tag_name}-nat-eip"
+    Name = "${var.tag_name}-eip"
   }
 }
 
@@ -9,7 +9,7 @@ resource "aws_nat_gateway" "main" {
   subnet_id     = var.subnet_id
 
   tags = {
-    Name = "${var.tag_name}-nat-gw"
+    Name = "${var.tag_name}-gw"
   }
 }
 
