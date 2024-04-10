@@ -6,7 +6,6 @@ variable "config" {
     user_data = string
 
     public          = bool
-    subnet_id       = string
     security_groups = list(string)
 
     image_id = {

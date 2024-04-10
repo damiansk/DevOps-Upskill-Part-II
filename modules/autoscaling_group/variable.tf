@@ -16,12 +16,12 @@ variable "config" {
     }
 
     subnets = list(string)
-    arn     = string
 
     launch_template = object({
       id      = string
       version = string
-      arn     = string
     })
+
+    lb_target_group_arn = string
   })
 }
