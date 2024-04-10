@@ -2,18 +2,9 @@ variable "config" {
   type = object({
     name = string
 
-    desired_capacity = {
-      type    = number
-      default = 2
-    }
-    max_size = {
-      type    = number
-      default = 2
-    }
-    min_size = {
-      type    = number
-      default = 2
-    }
+    desired_capacity = optional(number, 2)
+    max_size         = optional(number, 2)
+    min_size         = optional(number, 2)
 
     subnets = list(string)
 

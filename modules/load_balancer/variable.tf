@@ -1,11 +1,8 @@
 variable "config" {
   type = object({
-    name     = string
-    internal = bool
-    lb_type = {
-      type    = string
-      default = "application"
-    }
+    name            = string
+    internal        = bool
+    lb_type         = optional(string, "application")
     security_groups = list(string)
     subnets         = list(string)
 
