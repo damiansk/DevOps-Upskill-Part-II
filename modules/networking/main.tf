@@ -1,30 +1,15 @@
 module "network" {
   source = "../network"
 
-  config = {
-    cidr_block = var.networking.network.cidr_block
-    name       = var.networking.network.name
-    subnets    = var.networking.network.subnets
-  }
+  config = var.networking.network
 }
 
-module "igw" {
+module "internet_gateway" {
   source = "../internet_gateway"
 
-  vpc_id = module.network.vpc_id
-  igw = {
-    tags = {
-      Name = var.networking.igw.resource_name
-    }
-  }
-  rt = {
-    routes = [{
-      cidr_block = "0.0.0.0/0"
-      gateway_id = module.igw.igw_id
-    }]
-    tags = {
-      Name = "${var.networking.network.name}-public"
-    }
+  config = {
+    vpc_id = module.network.vpc_id
+    name   = "${var.networking.network.name}-internet_gateway"
   }
 
   depends_on = [module.network]
@@ -47,7 +32,7 @@ module "nat" {
     }
   }
 
-  depends_on = [module.network, module.igw.igw_id]
+  depends_on = [module.network]
 }
 
 module "associate_rt_subnet" {
@@ -55,10 +40,10 @@ module "associate_rt_subnet" {
 
   associate = [{
     subnet_id      = module.network.subnets.public-1.id
-    route_table_id = module.igw.rt_id
+    route_table_id = module.internet_gateway.route_table_id
     }, {
     subnet_id      = module.network.subnets.public-2.id
-    route_table_id = module.igw.rt_id
+    route_table_id = module.internet_gateway.route_table_id
     },
     {
       subnet_id      = module.network.subnets.private-1.id

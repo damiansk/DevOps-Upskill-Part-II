@@ -1,19 +1,6 @@
-variable "vpc_id" {
-  type = string
-}
-
-variable "igw" {
+variable "config" {
   type = object({
-    tags = map(string)
-  })
-}
-
-variable "rt" {
-  type = object({
-    tags = map(string)
-    routes = list(object({
-      cidr_block = string
-      gateway_id = string
-    }))
+    vpc_id = string
+    name   = string
   })
 }
