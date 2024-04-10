@@ -11,46 +11,35 @@ module "internet_gateway" {
     vpc_id = module.network.vpc_id
     name   = "${var.networking.network.name}-internet_gateway"
   }
-
-  depends_on = [module.network]
+  # depends_on = [module.network]
 }
 
-module "nat" {
+module "nat_gateway" {
   source = "../nat_gateway"
 
-  vpc_id    = module.network.vpc_id
-  subnet_id = module.network.subnets.public-1.id
-  tag_name  = "${var.networking.network.name}-nat-eip"
-
-  rt = {
-    routes = [{
-      cidr_block = "0.0.0.0/0"
-      gateway_id = module.nat.nat_gw_id
-    }]
-    tags = {
-      Name = "${var.networking.network.name}-private"
-    }
+  config = {
+    name      = "${var.networking.network.name}-nat_gateway"
+    vpc_id    = module.network.vpc_id
+    subnet_id = module.network.subnets.public-1.id
   }
-
-  depends_on = [module.network]
+  # depends_on = [module.network]
 }
 
-module "associate_rt_subnet" {
-  source = "../associate_route-table_subnet"
+module "route_table_association" {
+  source = "../route_table_association"
 
-  associate = [{
+  config = [{
     subnet_id      = module.network.subnets.public-1.id
     route_table_id = module.internet_gateway.route_table_id
     }, {
     subnet_id      = module.network.subnets.public-2.id
     route_table_id = module.internet_gateway.route_table_id
-    },
-    {
-      subnet_id      = module.network.subnets.private-1.id
-      route_table_id = module.nat.rt_id
-      }, {
-      subnet_id      = module.network.subnets.private-2.id
-      route_table_id = module.nat.rt_id
+    }, {
+    subnet_id      = module.network.subnets.private-1.id
+    route_table_id = module.nat_gateway.route_table_id
+    }, {
+    subnet_id      = module.network.subnets.private-2.id
+    route_table_id = module.nat_gateway.route_table_id
   }]
 }
 

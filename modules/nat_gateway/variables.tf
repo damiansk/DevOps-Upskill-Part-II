@@ -1,21 +1,7 @@
-variable "vpc_id" {
-  type = string
-}
-
-variable "tag_name" {
-  type = string
-}
-
-variable "subnet_id" {
-  type = string
-}
-
-variable "rt" {
+variable "config" {
   type = object({
-    tags = map(string)
-    routes = list(object({
-      cidr_block = string
-      gateway_id = string
-    }))
+    name      = string
+    vpc_id    = string
+    subnet_id = string
   })
 }

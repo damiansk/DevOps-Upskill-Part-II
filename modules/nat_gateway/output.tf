@@ -1,11 +1,3 @@
-output "nat_gw" {
-  value = aws_nat_gateway.main
-}
-
-output "nat_gw_id" {
-  value = aws_nat_gateway.main.id
-}
-
-output "rt_id" {
-  value = module.route_table_private.rt_id
+output "route_table_id" {
+  value = module.nat_gateway_route_table.rt_id
 }
