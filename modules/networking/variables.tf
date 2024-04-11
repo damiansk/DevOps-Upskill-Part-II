@@ -17,13 +17,8 @@ variable "networking" {
     nat = object({
       resource_name = string
     })
-    security_groups = object({
-      public = object({
-        resource_name = string
-      })
-      private = object({
-        resource_name = string
-      })
-    })
+    security_groups = list(object({
+      name = string
+    }))
   })
 }

@@ -44,15 +44,13 @@ networking = {
     resource_name = "nat"
   }
 
-
-  security_groups = {
-    public = {
-      resource_name = "public_sg"
+  security_groups = [
+    {
+      name = "public"
+      }, {
+      name = "private"
     }
-    private = {
-      resource_name = "private_sg"
-    }
-  }
+  ]
 }
 
 ec2 = {

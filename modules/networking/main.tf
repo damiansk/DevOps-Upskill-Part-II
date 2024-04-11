@@ -43,26 +43,13 @@ module "route_table_association" {
   }]
 }
 
-module "public_sg" {
+module "security_groups" {
   source = "../security_group"
 
-  name        = var.networking.security_groups.public.resource_name
-  description = var.networking.security_groups.public.resource_name
-  vpc_id      = module.network.vpc_id
+  config = {
+    vpc_id = module.network.vpc_id
+    name   = "${var.networking.network.name}-security_group"
 
-  tags = {
-    Name = var.networking.security_groups.public.resource_name
-  }
-}
-
-module "private_sg" {
-  source = "../security_group"
-
-  name        = var.networking.security_groups.private.resource_name
-  description = var.networking.security_groups.private.resource_name
-  vpc_id      = module.network.vpc_id
-
-  tags = {
-    Name = var.networking.security_groups.private.resource_name
+    security_groups = var.networking.security_groups
   }
 }

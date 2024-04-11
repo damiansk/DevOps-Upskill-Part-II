@@ -1,39 +1,28 @@
-variable "name" {
-  type = string
-}
+variable "config" {
+  type = object({
+    vpc_id = string
+    name   = string
 
-variable "description" {
-  type = string
-}
+    security_groups = list(object({
+      name = string
 
-variable "vpc_id" {
-  type = string
-}
+      ingress_rules = optional(list(object({
+        description     = optional(string)
+        from_port       = optional(number)
+        to_port         = optional(number)
+        protocol        = optional(string)
+        cidr_blocks     = optional(list(string))
+        security_groups = optional(list(string))
+      })), [])
 
-variable "tags" {
-  type = map(string)
-}
-
-variable "ingress_rules" {
-  type = list(object({
-    description     = optional(string)
-    from_port       = optional(number)
-    to_port         = optional(number)
-    protocol        = optional(string)
-    cidr_blocks     = optional(list(string))
-    security_groups = optional(list(string))
-  }))
-  default = []
-}
-
-variable "egress_rules" {
-  type = list(object({
-    description     = optional(string)
-    from_port       = optional(number)
-    to_port         = optional(number)
-    protocol        = optional(string)
-    cidr_blocks     = optional(list(string))
-    security_groups = optional(list(string))
-  }))
-  default = []
+      egress_rules = optional(list(object({
+        description     = optional(string)
+        from_port       = optional(number)
+        to_port         = optional(number)
+        protocol        = optional(string)
+        cidr_blocks     = optional(list(string))
+        security_groups = optional(list(string))
+      })), [])
+    }))
+  })
 }
