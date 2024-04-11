@@ -17,8 +17,5 @@ variable "networking" {
     nat = object({
       resource_name = string
     })
-    security_groups = list(object({
-      name = string
-    }))
   })
 }

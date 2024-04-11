@@ -44,12 +44,9 @@ module "route_table_association" {
 }
 
 module "security_groups" {
-  source = "../security_group"
+  source = "../security_groups"
 
   config = {
     vpc_id = module.network.vpc_id
-    name   = "${var.networking.network.name}-security_group"
-
-    security_groups = var.networking.security_groups
   }
 }

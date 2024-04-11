@@ -1,12 +1,9 @@
 resource "aws_security_group" "main" {
   vpc_id = var.config.vpc_id
-
-  for_each = { for index, security_group in var.config.security_groups : index => security_group }
-
-  name = "${var.config.name}-${each.value.name}"
+  name   = "${var.config.name}-security-group"
 
   dynamic "ingress" {
-    for_each = each.value.ingress_rules
+    for_each = var.config.ingress
 
     content {
       description     = try(ingress.value.description, null)
@@ -19,7 +16,7 @@ resource "aws_security_group" "main" {
   }
 
   dynamic "egress" {
-    for_each = each.value.egress_rules
+    for_each = var.config.egress
 
     content {
       description     = try(egress.value.description, null)
@@ -32,6 +29,6 @@ resource "aws_security_group" "main" {
   }
 
   tags = {
-    Name = "${var.config.name}-${each.value.name}"
+    Name = "${var.config.name}-security-group"
   }
 }

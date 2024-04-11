@@ -43,14 +43,6 @@ networking = {
   nat = {
     resource_name = "nat"
   }
-
-  security_groups = [
-    {
-      name = "public"
-      }, {
-      name = "private"
-    }
-  ]
 }
 
 ec2 = {
