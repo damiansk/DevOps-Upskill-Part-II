@@ -2,14 +2,14 @@ module "load_balancer" {
   source = "../load_balancer"
 
   config = {
-    name            = "${var.config.name}-load_balancer"
-    internal        = var.load_balancer.config.internal
-    security_groups = var.load_balancer.config.security_groups
-    subnets         = var.load_balancer.config.subnets
+    name            = "${var.config.name}-load-balancer"
+    subnets         = var.config.subnets
+    internal        = var.config.load_balancer.internal
+    security_groups = var.config.load_balancer.security_groups
 
     target_group = {
-      name   = "${var.config.name}-target_group"
-      vpc_id = var.load_balancer.config.vpc_id
+      name   = "${var.config.name}-target-group"
+      vpc_id = var.config.load_balancer.vpc_id
     }
   }
 }
@@ -36,7 +36,7 @@ module "autoscaling_group" {
     subnets = var.config.subnets
     launch_template = {
       id      = module.launch_template.id
-      version = module.launch_template.version
+      version = module.launch_template.latest_version
     }
     lb_target_group_arn = module.load_balancer.lb_target_group_arn
   }

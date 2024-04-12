@@ -3,13 +3,15 @@ module "private-load_balancer-security_group" {
 
   config = {
     vpc_id = var.config.vpc_id
-    name   = "private-load_balancer"
+    # TODO: Move to config - variables
+    name = "private-load_balancer"
 
     ingress = [{
-      description     = "all"
-      from_port       = 0
-      to_port         = 0
-      protocol        = "-1"
+      description = "all"
+      from_port   = 0
+      to_port     = 0
+      protocol    = "-1"
+      # TODO use locals for config
       security_groups = [module.public-launch_template-security_group.id]
     }]
     egress = [{

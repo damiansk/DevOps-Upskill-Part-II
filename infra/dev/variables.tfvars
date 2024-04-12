@@ -8,7 +8,8 @@ networking = {
         cidr_block        = "10.0.1.0/24"
         availability_zone = "us-east-1a"
         tags = {
-          Name = "public-1-east-1a"
+          Name       = "public-1-east-1a"
+          Visibility = "public"
         }
       },
       {
@@ -16,7 +17,8 @@ networking = {
         cidr_block        = "10.0.2.0/24"
         availability_zone = "us-east-1b"
         tags = {
-          Name = "public-1-east-1b"
+          Name       = "public-1-east-1b"
+          Visibility = "public"
         }
       },
       {
@@ -24,7 +26,8 @@ networking = {
         cidr_block        = "10.0.11.0/24"
         availability_zone = "us-east-1a"
         tags = {
-          Name = "private-1-east-1a"
+          Name       = "private-1-east-1a"
+          Visibility = "private"
         }
       },
       {
@@ -32,7 +35,8 @@ networking = {
         cidr_block        = "10.0.12.0/24"
         availability_zone = "us-east-1b"
         tags = {
-          Name = "private-2-east-1b"
+          Name       = "private-2-east-1b"
+          Visibility = "private"
         }
       },
     ],

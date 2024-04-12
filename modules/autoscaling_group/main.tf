@@ -9,7 +9,7 @@ resource "aws_autoscaling_group" "main" {
 
   launch_template {
     id      = var.config.launch_template.id
-    version = var.config.launch_template.latest_version
+    version = var.config.launch_template.version
   }
 }
 resource "aws_autoscaling_attachment" "main" {

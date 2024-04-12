@@ -7,10 +7,10 @@ terraform {
   }
 
   backend "s3" {
-    bucket         = "dstolarek-upskill-devops-terraform-apps-s3-state" // Use same as infra
-    key            = "state/terraform.tfstate"                          // Change key to have different than in infra
+    bucket         = "dstolarek-upskill-devops-terraform-s3-state"
+    key            = "state/apps/dev/terraform.tfstate"
     region         = "us-east-1"
-    dynamodb_table = "dstolarek-terraform-apps-s3-dynamodb" // Use same as infra
+    dynamodb_table = "dstolarek-upskill-devops-terraform-s3-dynamodb"
     encrypt        = true
     profile        = "dstolarek-upskill-devops"
   }

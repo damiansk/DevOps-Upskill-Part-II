@@ -11,6 +11,7 @@ module "internet_gateway" {
     vpc_id = module.network.vpc_id
     name   = "${var.networking.network.name}-internet_gateway"
   }
+
   # depends_on = [module.network]
 }
 
@@ -22,6 +23,7 @@ module "nat_gateway" {
     vpc_id    = module.network.vpc_id
     subnet_id = module.network.subnets.public-1.id
   }
+
   # depends_on = [module.network]
 }
 
