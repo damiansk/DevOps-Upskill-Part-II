@@ -19,11 +19,13 @@ terraform {
 provider "aws" {
   region  = "us-east-1"
   profile = "dstolarek-upskill-devops"
-}
 
-# provider "aws" {
-#   region = var.region
-#   default_tags {
-#     tags = var.tags # Use deafult tags - will be passed to all resources
-#   }
-# }
+  default_tags {
+    tags = {
+      Environment = "Dev"
+      Owner       = "dstolarek"
+      Application = "DevOps Terraform Upskill"
+      Version     = "180424"
+    }
+  }
+}

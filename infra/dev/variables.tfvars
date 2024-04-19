@@ -39,6 +39,24 @@ networking = {
           Visibility = "private"
         }
       },
+      {
+        name              = "private-db-1"
+        cidr_block        = "10.0.13.0/24"
+        availability_zone = "us-east-1a"
+        tags = {
+          Name        = "private-db-1-east-1a"
+          Destination = "database"
+        }
+      },
+      {
+        name              = "private-db-2"
+        cidr_block        = "10.0.14.0/24"
+        availability_zone = "us-east-1b"
+        tags = {
+          Name        = "private-db-2-east-1b"
+          Destination = "database"
+        }
+      },
     ],
   },
   igw = {
@@ -50,7 +68,7 @@ networking = {
 }
 
 ec2 = {
-  ami           = "ami-0c101f26f147fa7fd" # Amazon Linux 2023 AMI
+  ami           = "ami-080e1f13689e07408" # Canonical, Ubuntu, 22.04 LTS
   instance_type = "t2.micro"
   name          = "pipeline_ec2"
 }

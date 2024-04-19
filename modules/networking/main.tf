@@ -43,12 +43,6 @@ module "route_table_association" {
     subnet_id      = module.network.subnets.private-2.id
     route_table_id = module.nat_gateway.route_table_id
   }]
-}
 
-module "security_groups" {
-  source = "../security_groups"
-
-  config = {
-    vpc_id = module.network.vpc_id
-  }
+  depends_on = [module.network]
 }

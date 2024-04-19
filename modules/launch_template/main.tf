@@ -3,7 +3,7 @@ resource "aws_launch_template" "main" {
   description = var.config.description
   # TODO: Better to use data source to find latest imgae
   # or define default with data source as a fallback
-  image_id      = var.config.image_id # Amazon Linux 2023 AMI
+  image_id      = var.config.image_id # Canonical, Ubuntu, 22.04 LTS
   instance_type = "t2.micro"          # TODO: From variable with default
 
   user_data = var.config.user_data

@@ -9,7 +9,59 @@ data "aws_subnets" "public" {
     values = ["public"]
   }
 
-  # TODO add filtr for owner
+  filter {
+    name   = "tag:Owner"
+    values = ["dstolarek"]
+  }
+
+  filter {
+    name   = "tag:Version"
+    values = ["180424"]
+  }
+}
+
+data "aws_subnets" "private" {
+  filter {
+    name   = "state"
+    values = ["available"]
+  }
+
+  filter {
+    name   = "tag:Visibility"
+    values = ["private"]
+  }
+
+  filter {
+    name   = "tag:Owner"
+    values = ["dstolarek"]
+  }
+
+  filter {
+    name   = "tag:Version"
+    values = ["180424"]
+  }
+}
+
+data "aws_subnets" "database" {
+  filter {
+    name   = "state"
+    values = ["available"]
+  }
+
+  filter {
+    name   = "tag:Destination"
+    values = ["database"]
+  }
+
+  filter {
+    name   = "tag:Owner"
+    values = ["dstolarek"]
+  }
+
+  filter {
+    name   = "tag:Version"
+    values = ["180424"]
+  }
 }
 
 data "aws_vpc" "main" {
@@ -23,30 +75,13 @@ data "aws_vpc" "main" {
     values = ["dstolarek-upskill-vpc"]
   }
 
-  # TODO add filtr for owner
-}
-
-# TODO: Use module directly instead
-data "aws_security_group" "public-load_balancer" {
   filter {
-    name   = "tag:Name"
-    values = ["public-load_balancer-security-group"]
+    name   = "tag:Owner"
+    values = ["dstolarek"]
   }
 
   filter {
-    name   = "tag:Application"
-    values = ["DevOps Terraform Upskill"]
-  }
-}
-
-data "aws_security_group" "public-launch_template" {
-  filter {
-    name   = "tag:Name"
-    values = ["public-launch_template-security-group"]
-  }
-
-  filter {
-    name   = "tag:Application"
-    values = ["DevOps Terraform Upskill"]
+    name   = "tag:Version"
+    values = ["180424"]
   }
 }

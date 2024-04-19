@@ -25,6 +25,7 @@ provider "aws" {
       Environment = "Dev"
       Owner       = "dstolarek"
       Application = "DevOps Terraform Upskill"
+      Version     = "180424"
     }
   }
 }
