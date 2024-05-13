@@ -7,4 +7,8 @@ resource "aws_instance" "ec2_instance" {
   tags = {
     Name = "${var.ec2_config.name}-ec2"
   }
+
+  user_data                   = var.ec2_config.user_data
+  associate_public_ip_address = var.ec2_config.public
+  security_groups             = var.ec2_config.security_groups
 }

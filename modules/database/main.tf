@@ -22,7 +22,7 @@ resource "aws_db_instance" "main" {
   identifier                = var.config.database.identifier
   allocated_storage         = 5
   engine                    = "mysql"
-  engine_version            = "8.0.28"
+  engine_version            = "8.0.35"
   instance_class            = "db.t3.micro"
   db_name                   = var.config.database.name
   username                  = var.config.database.user

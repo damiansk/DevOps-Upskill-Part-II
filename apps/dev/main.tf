@@ -171,10 +171,11 @@ module "private-launch_template-security_group" {
       protocol    = "-1"
       cidr_blocks = ["0.0.0.0/0"]
       }, {
-      description     = "MYSQL/Aurora"
-      from_port       = 3306
-      to_port         = 3306
-      protocol        = "tcp"
+      description = "MYSQL/Aurora"
+      from_port   = 3306
+      to_port     = 3306
+      protocol    = "tcp"
+      # cidr_blocks = ["0.0.0.0/0"] TODO
       security_groups = [module.private-database-security_group.id]
       }
     ]

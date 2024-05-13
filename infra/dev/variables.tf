@@ -24,10 +24,11 @@ variable "networking" {
   }
 }
 
-variable "ec2" {
+variable "ec2_pipeline" {
   type = object({
     ami           = string
     instance_type = string
     name          = string
+    runner_token  = string
   })
 }

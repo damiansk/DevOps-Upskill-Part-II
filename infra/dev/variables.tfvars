@@ -67,9 +67,10 @@ networking = {
   }
 }
 
-ec2 = {
+ec2_pipeline = {
   ami           = "ami-080e1f13689e07408" # Canonical, Ubuntu, 22.04 LTS
   instance_type = "t2.micro"
   name          = "pipeline_ec2"
+  runner_token  = "xyz"
 }
 
