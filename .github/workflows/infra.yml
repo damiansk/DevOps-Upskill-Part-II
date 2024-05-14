@@ -32,6 +32,17 @@ jobs:
           role-session-name: ${{ env.IAM_ROLE_NAME }}
           aws-region: ${{ env.AWS_REGION }}
 
+      - name: Add profile credentials to ~/.aws/credentials
+        env:
+          AWS_ACCESS_KEY_ID: ${{ steps.aws-credentials.outputs.aws-access-key-id }}
+          AWS_SECRET_ACCESS_KEY: ${{ steps.aws-credentials.outputs.aws-secret-access-key }}
+          AWS_SESSION_TOKEN: ${{ steps.aws-credentials.outputs.aws-session-token }}
+        run: |
+          aws configure set region ${{ env.AWS_REGION }} --profile dstolarek-upskill-devops
+          aws configure set aws_access_key_id ${{ env.AWS_ACCESS_KEY_ID }} --profile dstolarek-upskill-devops
+          aws configure set aws_secret_access_key ${{ env.AWS_SECRET_ACCESS_KEY }} --profile dstolarek-upskill-devops
+          aws configure set aws_session_token ${{ env.AWS_SESSION_TOKEN }} --profile dstolarek-upskill-devops
+
       - name: Terraform Init
         env:
           AWS_ACCESS_KEY_ID: ${{ steps.aws-credentials.outputs.aws-access-key-id }}
