@@ -18,17 +18,17 @@ jobs:
 
     steps:
       - name: Git clone the repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Configure aws credentials
-        uses: aws-actions/configure-aws-credentials@v4.0.2
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{ env.IAM_ROLE }}
           role-session-name: ${{ env.IAM_ROLE_NAME }}
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Navigate to Infra terraform
-        run: cd infra/dev
+        run: cd ./infra/dev
 
       - name: Init terraform
         run: terraform init
