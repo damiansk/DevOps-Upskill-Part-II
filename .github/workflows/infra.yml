@@ -31,6 +31,7 @@ jobs:
           role-to-assume: ${{ env.IAM_ROLE }}
           role-session-name: ${{ env.IAM_ROLE_NAME }}
           aws-region: ${{ env.AWS_REGION }}
+          output-credentials: true
 
       - name: Add profile credentials to ~/.aws/credentials
         env:
