@@ -27,6 +27,8 @@ jobs:
           role-session-name: ${{ env.IAM_ROLE_NAME }}
           aws-region: ${{ env.AWS_REGION }}
 
-      - name: Sts GetCallerIdentity
-        run: |
-          aws sts get-caller-identity
+      - name: Navigate to Infra terraform
+        run: cd infra/dev
+
+      - name: Init terraform
+        run: terraform init
