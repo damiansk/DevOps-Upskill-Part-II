@@ -27,6 +27,11 @@ jobs:
           role-session-name: ${{ env.IAM_ROLE_NAME }}
           aws-region: ${{ env.AWS_REGION }}
 
+      - name: Log
+        run: |
+          pwd
+          ls -la
+
       - name: Navigate to Infra terraform
         run: cd ./infra/dev
 
