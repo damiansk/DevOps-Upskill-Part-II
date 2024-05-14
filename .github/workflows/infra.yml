@@ -30,10 +30,11 @@ jobs:
       - name: Log
         run: |
           pwd
-          ls -la
 
       - name: Navigate to Infra terraform
         run: cd ./infra/dev
 
       - name: Init terraform
-        run: terraform init
+        run: |
+          ls -la
+          terraform init
