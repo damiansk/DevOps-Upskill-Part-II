@@ -20,6 +20,8 @@ module "pipeline" {
     public          = true
     # user_data       = base64encode(templatefile("./templates/pipeline.tpl", { runner_token = "${var.ec2_pipeline.runner_token}" }))
   }
+
+  depends_on = [module.public-pipeline-security_group]
 }
 
 module "public-pipeline-security_group" {
