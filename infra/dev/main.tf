@@ -8,14 +8,6 @@ module "networking" {
   }
 }
 
-# data "aws_subnet" "public_subnet" {
-#   id = module.networking.network.subnets.public-1.id
-# }
-
-// TODO
-// Communicate EC2 with GH
-// EC2 should have GH Agents and should communicat with GH
-// 
 module "pipeline" {
   source = "../../modules/ec2"
 
