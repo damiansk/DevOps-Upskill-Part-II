@@ -7,7 +7,6 @@ env:
   AWS_REGION: ${{ secrets.AWS_REGION }}
   IAM_ROLE: ${{ secrets.IAM_ROLE }}
   IAM_ROLE_NAME: ${{ secrets.IAM_ROLE_NAME }}
-  TERRAFORM_VAR_FILE: "variables.tfvars"
 
 permissions:
   id-token: write
@@ -51,4 +50,4 @@ jobs:
         run: terraform plan
 
       - name: Terraform Apply
-        run: terraform apply -var-file=${{ env.TERRAFORM_VAR_FILE }} -auto-approve
+        run: terraform apply -auto-approve
