@@ -19,4 +19,8 @@ resource "aws_launch_template" "main" {
       Name = var.config.name
     }
   }
+
+  iam_instance_profile {
+    name = try(var.config.iam_profile, null)
+  }
 }

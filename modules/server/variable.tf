@@ -13,6 +13,7 @@ variable "config" {
       user_data       = string
       public          = bool
       security_groups = list(string)
+      iam_profile     = optional(string)
     })
   })
 }

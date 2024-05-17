@@ -25,6 +25,8 @@ module "launch_template" {
 
     public          = var.config.launch_template.public
     security_groups = var.config.launch_template.security_groups
+
+    iam_profile = var.config.launch_template.iam_profile
   }
 }
 

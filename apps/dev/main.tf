@@ -39,6 +39,7 @@ module "server_backend" {
       user_data       = base64encode(templatefile("./templates/private-server.tpl", { database_url = "${module.database.host}" }))
       public          = false
       security_groups = [module.private-launch_template-security_group.id]
+      iam_profile     = module.private_launch_template_aim_profile.id
     }
   }
 
@@ -209,5 +210,50 @@ module "public-launch_template-security_group" {
       protocol    = "-1"
       cidr_blocks = ["0.0.0.0/0"]
     }]
+  }
+}
+
+module "private_launch_template_aim_profile" {
+  source = "../../modules/iam_profile"
+
+  config = {
+    name = "private-launch-template"
+
+    policies = [{
+      name = "s3",
+      policy = jsonencode({
+        "Version" : "2012-10-17",
+        "Statement" : [
+          {
+            "Effect" : "Allow",
+            "Action" : [
+              "s3:ListBucket",
+              "s3:GetObject",
+              "s3:PutObject",
+              "s3:DeleteObject"
+            ],
+            "Resource" : [
+              "arn:aws:s3:::*/*",
+            ]
+          }
+        ]
+      })
+      }, {
+      name = "secrets-manager",
+      policy = jsonencode({
+        "Version" : "2012-10-17",
+        "Statement" : [
+          {
+            "Sid" : "BasePermissions",
+            "Effect" : "Allow",
+            "Action" : [
+              "secretsmanager:*",
+            ],
+            "Resource" : "*"
+          }
+        ]
+      })
+      }
+    ]
   }
 }
