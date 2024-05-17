@@ -1,4 +1,4 @@
-name: Application terraform
+name: Infrastructure terraform
 
 on:
   workflow_dispatch:
@@ -18,7 +18,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: ./apps/dev
+        working-directory: ./infra/dev
 
     steps:
       - name: Git clone the repository
@@ -47,7 +47,7 @@ jobs:
         run: terraform init
 
       - name: Terraform Plan
-        run: terraform plan
+        run: terraform plan --var-file="variables.tfvars"
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve
+        run: terraform apply --var-file="variables.tfvars" -auto-approve
