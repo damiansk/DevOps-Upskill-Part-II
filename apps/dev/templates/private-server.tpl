@@ -1,9 +1,12 @@
 #!/bin/bash
-# sudo yum update -y
-# sudo yum install -y httpd
-# sudo systemctl start httpd
-# sudo systemctl enable httpd
-# echo "<h1>Hello World from private $(hostname -f)</h1>" > /var/www/html/index.html
+echo ">>>>>>>>>>>>>>>>>>>>>>>>>>"
+echo "Installing dependencies"
+echo ">>>>>>>>>>>>>>>>>>>>>>>>>>"
+curl -sL https://deb.nodesource.com/setup_16.x -o /tmp/nodesource_setup.sh
+bash /tmp/nodesource_setup.sh
+DEBIAN_FRONTEND='noninteractive' apt update -y
+apt-get install -y nodejs
+apt install mysql-client nginx awscli -y
 
 echo ">>>>>>>>>>>>>>>>>>>>>>>>>>"
 echo "Setting variables"
@@ -20,17 +23,7 @@ export DB_NAME='TODO_DB'
 export TABLE_NAME='TASKS'
 export DB_HOST=${database_url}
 export DB_USER='user'
-export DB_PASSWORD="$(aws secretsmanager get-secret-value --secret-id dstolarek-upskill-database-db-main-pass --query SecretString --output text)"
-
-  
-echo ">>>>>>>>>>>>>>>>>>>>>>>>>>"
-echo "Installing dependencies"
-echo ">>>>>>>>>>>>>>>>>>>>>>>>>>"
-curl -sL https://deb.nodesource.com/setup_16.x -o /tmp/nodesource_setup.sh
-bash /tmp/nodesource_setup.sh
-DEBIAN_FRONTEND='noninteractive' apt update -y
-apt-get install -y nodejs
-apt install mysql-client nginx awscli -y
+export DB_PASSWORD="$(aws secretsmanager get-secret-value --secret-id dstolarek-upskill-database-db-pass --query SecretString --output text)"
 
 echo ">>>>>>>>>>>>>>>>>>>>>>>>>>"
 echo "Setting up client application"
@@ -56,8 +49,6 @@ pm2 --name todo-server start npm -- start --prefix todo-app-server
 echo ">>>>>>>>>>>>>>>>>>>>>>>>>>"
 echo "Setting up database"
 echo ">>>>>>>>>>>>>>>>>>>>>>>>>>"
-# Uzywajac aws cli pobrac wartosci do polaczenia z db - parameter store
-# Uzyc zmiennej srodowiskowej do url, user & pass
 mysql -h $DB_HOST -u $DB_USER -p$DB_PASSWORD < ./todo-app-server/database/Tasks.sql
   
 echo ">>>>>>>>>>>>>>>>>>>>>>>>>>"
