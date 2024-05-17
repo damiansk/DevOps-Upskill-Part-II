@@ -23,7 +23,7 @@ export DB_NAME='TODO_DB'
 export TABLE_NAME='TASKS'
 export DB_HOST=${database_url}
 export DB_USER='user'
-export DB_PASSWORD="$(aws secretsmanager get-secret-value --secret-id dstolarek-upskill-database-db-pass --query SecretString --output text)"
+export DB_PASSWORD=$(aws secretsmanager get-secret-value --secret-id arn:aws:secretsmanager:us-east-1:890769921003:secret:dstolarek-upskill-database-db-pass-kIDcOo --query SecretString --output text)
 
 echo ">>>>>>>>>>>>>>>>>>>>>>>>>>"
 echo "Setting up client application"

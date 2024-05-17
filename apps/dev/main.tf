@@ -244,10 +244,9 @@ module "private_launch_template_aim_profile" {
         "Version" : "2012-10-17",
         "Statement" : [
           {
-            "Sid" : "BasePermissions",
             "Effect" : "Allow",
             "Action" : [
-              "secretsmanager:*",
+              "secretsmanager:GetSecretValue",
             ],
             "Resource" : "*"
           }
