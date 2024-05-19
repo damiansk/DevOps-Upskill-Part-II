@@ -5,7 +5,7 @@ resource "random_password" "database-password" {
 }
 
 resource "aws_secretsmanager_secret" "db-pass" {
-  name = "${var.config.name}-db-pass"
+  name = "${var.config.name}-main"
 }
 
 resource "aws_secretsmanager_secret_version" "db-pass-val" {

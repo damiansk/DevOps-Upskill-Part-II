@@ -16,7 +16,7 @@ data "aws_subnets" "public" {
 
   filter {
     name   = "tag:Version"
-    values = ["180424"]
+    values = ["180524"]
   }
 }
 
@@ -38,7 +38,7 @@ data "aws_subnets" "private" {
 
   filter {
     name   = "tag:Version"
-    values = ["180424"]
+    values = ["180524"]
   }
 }
 
@@ -60,7 +60,7 @@ data "aws_subnets" "database" {
 
   filter {
     name   = "tag:Version"
-    values = ["180424"]
+    values = ["180524"]
   }
 }
 
@@ -82,6 +82,6 @@ data "aws_vpc" "main" {
 
   filter {
     name   = "tag:Version"
-    values = ["180424"]
+    values = ["180524"]
   }
 }
