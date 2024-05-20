@@ -10,6 +10,7 @@ variable "config" {
     })
 
     launch_template = object({
+      version         = string
       user_data       = string
       public          = bool
       security_groups = list(string)

@@ -20,6 +20,7 @@ module "launch_template" {
   config = {
     name        = "${var.config.name}-launch_template"
     description = "Launch template for ${var.config.name}"
+    version     = var.config.launch_template.version
 
     user_data = var.config.launch_template.user_data
 

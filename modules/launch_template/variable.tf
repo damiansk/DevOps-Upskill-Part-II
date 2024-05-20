@@ -2,6 +2,7 @@ variable "config" {
   type = object({
     name        = string
     description = string
+    version     = string
 
     user_data = string
 

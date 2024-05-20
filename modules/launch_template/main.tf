@@ -4,10 +4,15 @@ resource "aws_launch_template" "main" {
   # TODO: Better to use data source to find latest imgae
   # or define default with data source as a fallback
   # TODO Change image to craete new version
-  image_id      = var.config.image_id # Canonical, Ubuntu, 22.04 LTS
-  instance_type = "t2.micro"          # TODO: From variable with default
+  image_id               = var.config.image_id # Canonical, Ubuntu, 22.04 LTS
+  instance_type          = "t2.micro"          # TODO: From variable with default
+  update_default_version = true
 
   user_data = var.config.user_data
+
+  tags = {
+    TemplateVersion = var.config.version
+  }
 
   network_interfaces {
     associate_public_ip_address = var.config.public

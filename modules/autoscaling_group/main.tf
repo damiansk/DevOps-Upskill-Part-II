@@ -11,6 +11,10 @@ resource "aws_autoscaling_group" "main" {
     id      = var.config.launch_template.id
     version = var.config.launch_template.version
   }
+
+  instance_refresh {
+    strategy = "Rolling"
+  }
 }
 resource "aws_autoscaling_attachment" "main" {
   autoscaling_group_name = aws_autoscaling_group.main.id
