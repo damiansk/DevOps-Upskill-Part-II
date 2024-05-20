@@ -4,9 +4,14 @@ echo "Installing dependencies"
 echo ">>>>>>>>>>>>>>>>>>>>>>>>>>"
 curl -sL https://deb.nodesource.com/setup_16.x -o /tmp/nodesource_setup.sh
 bash /tmp/nodesource_setup.sh
+# TODO 1 bash /tmp/nodesource_setup.sh | echo
+# TODO 2 OUTPUT=$(bash /tmp/nodesource_setup.sh)
+# TODO 3 Move it to function
 DEBIAN_FRONTEND='noninteractive' apt update -y
 apt-get install -y nodejs
 apt install mysql-client nginx awscli -y
+# TODO
+# apt-get install -y nodejs mysql-client nginx awscli -y
 
 echo ">>>>>>>>>>>>>>>>>>>>>>>>>>"
 echo "Setting variables"
@@ -23,7 +28,7 @@ export DB_NAME='TODO_DB'
 export TABLE_NAME='TASKS'
 export DB_HOST=${database_url}
 export DB_USER='user'
-export DB_PASSWORD=$(aws secretsmanager get-secret-value --secret-id arn:aws:secretsmanager:us-east-1:890769921003:secret:dstolarek-upskill-database-db-pass-kIDcOo --query SecretString --output text)
+export DB_PASSWORD=$(aws secretsmanager get-secret-value --secret-id dstolarek-upskill-database-main --query SecretString --output text --region us-east-1)
 
 echo ">>>>>>>>>>>>>>>>>>>>>>>>>>"
 echo "Setting up client application"

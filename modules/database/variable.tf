@@ -8,7 +8,6 @@ variable "config" {
       identifier = string
       name       = string
       user       = string
-      password   = string
     })
 
     security_groups = list(string)

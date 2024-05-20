@@ -46,8 +46,11 @@ jobs:
       - name: Terraform Init
         run: terraform init
 
+        # TODO Test this
       - name: Terraform Plan
-        run: terraform plan --var-file="variables.tfvars"
+        run: |
+          terraform plan --var-file="variables.tfvars" -out="plan.tfplan"
+          terraform show plan.tfplan
 
       - name: Terraform Apply
-        run: terraform apply --var-file="variables.tfvars" -auto-approve
+        run: terraform apply -auto-approve

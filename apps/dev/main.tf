@@ -59,8 +59,6 @@ module "database" {
       identifier = "dstolarek-upskill-rds"
       name       = "tododb"
       user       = "user"
-      password   = "zaq12WSX" # Objekt generujący randomowy ciąg znaków - https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password
-      # Dodanie do aws resource
     }
 
     security_groups = [module.private-database-security_group.id]
@@ -74,8 +72,7 @@ module "private-database-security_group" {
 
   config = {
     vpc_id = data.aws_vpc.main.id
-    # TODO: Move to config - variables
-    name = "private-database"
+    name   = "private-database"
 
     ingress = [{
       description = "MYSQL/Aurora"
@@ -99,15 +96,13 @@ module "private-load_balancer-security_group" {
 
   config = {
     vpc_id = data.aws_vpc.main.id
-    # TODO: Move to config - variables
-    name = "private-load_balancer"
+    name   = "private-load_balancer"
 
     ingress = [{
-      description = "all"
-      from_port   = 0
-      to_port     = 0
-      protocol    = "-1"
-      # TODO use locals for config
+      description     = "all"
+      from_port       = 0
+      to_port         = 0
+      protocol        = "-1"
       security_groups = [module.public-launch_template-security_group.id]
     }]
     egress = [{
@@ -246,9 +241,9 @@ module "private_launch_template_aim_profile" {
           {
             "Effect" : "Allow",
             "Action" : [
-              "secretsmanager:GetSecretValue",
+              "secretsmanager:GetSecretValue"
             ],
-            "Resource" : "*"
+            "Resource" : "arn:aws:secretsmanager:us-east-1:890769921003:secret:*"
           }
         ]
       })
