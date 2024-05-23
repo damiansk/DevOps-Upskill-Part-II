@@ -36,8 +36,11 @@ module "server_backend" {
     }
 
     launch_template = {
-      version         = timestamp()
-      user_data       = base64encode(templatefile("./templates/private-server.tpl", { database_url = "${module.database.host}" }))
+      version = var.app_version
+      user_data = base64encode(templatefile("./templates/private-server.tpl", {
+        database_url = "${module.database.host}",
+        app_version  = "${var.app_version}"
+      }))
       public          = false
       security_groups = [module.private-launch_template-security_group.id]
       iam_profile     = module.private_launch_template_aim_profile.id

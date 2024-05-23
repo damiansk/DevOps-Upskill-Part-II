@@ -2,6 +2,10 @@
 echo ">>>>>>>>>>>>>>>>>>>>>>>>>>"
 echo "Installing dependencies"
 echo ">>>>>>>>>>>>>>>>>>>>>>>>>>"
+echo "Version ${app_version}"
+echo ">>>>>>>>>>>>>>>>>>>>>>>>>>"
+echo "Installing dependencies"
+echo ">>>>>>>>>>>>>>>>>>>>>>>>>>"
 curl -sL https://deb.nodesource.com/setup_16.x -o /tmp/nodesource_setup.sh
 bash /tmp/nodesource_setup.sh
 # TODO 1 bash /tmp/nodesource_setup.sh | echo
