@@ -2,6 +2,11 @@ name: Application terraform
 
 on:
   workflow_dispatch:
+    inputs:
+      app_version:
+        description: "Version of the app"
+        required: true
+
   repository_dispatch:
     types: [app-update]
 
@@ -50,7 +55,7 @@ jobs:
 
       - name: Terraform Plan
         run: |
-          terraform plan -out="plan.tfplan"
+          terraform plan -out="plan.tfplan" -var app_version=${{ inputs.app_version }}
           terraform show plan.tfplan
 
       - name: Terraform Apply

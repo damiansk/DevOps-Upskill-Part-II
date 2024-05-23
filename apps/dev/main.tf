@@ -12,9 +12,8 @@ module "server_frontend" {
     }
 
     launch_template = {
-      version   = timestamp()
-      user_data = base64encode(templatefile("./templates/public-server.tpl", { private_server_url = "${module.server_backend.load_balancer_dns}" }))
-      # user_data       = base64encode(templatefile("./templates/private-server.tpl", { database_url = "${module.database.host}" }))
+      version         = var.app_version
+      user_data       = base64encode(templatefile("./templates/public-server.tpl", { private_server_url = "${module.server_backend.load_balancer_dns}" }))
       public          = true
       security_groups = [module.public-launch_template-security_group.id]
     }
