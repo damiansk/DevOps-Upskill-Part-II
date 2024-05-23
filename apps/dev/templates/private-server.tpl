@@ -1,4 +1,9 @@
 #!/bin/bash
+setup_nodejs() {
+	curl -sL https://deb.nodesource.com/setup_16.x -o /tmp/nodesource_setup.sh
+	bash /tmp/nodesource_setup.sh
+}
+
 echo ">>>>>>>>>>>>>>>>>>>>>>>>>>"
 echo "Version"
 echo ">>>>>>>>>>>>>>>>>>>>>>>>>>"
@@ -6,16 +11,9 @@ echo ${app_version}
 echo ">>>>>>>>>>>>>>>>>>>>>>>>>>"
 echo "Installing dependencies"
 echo ">>>>>>>>>>>>>>>>>>>>>>>>>>"
-curl -sL https://deb.nodesource.com/setup_16.x -o /tmp/nodesource_setup.sh
-bash /tmp/nodesource_setup.sh
-# TODO 1 bash /tmp/nodesource_setup.sh | echo
-# TODO 2 OUTPUT=$(bash /tmp/nodesource_setup.sh)
-# TODO 3 Move it to function
-DEBIAN_FRONTEND='noninteractive' apt update -y
-apt-get install -y nodejs
-apt install mysql-client nginx awscli -y
-# TODO
-# apt-get install -y nodejs mysql-client nginx awscli -y
+setup_nodejs
+DEBIAN_FRONTEND='noninteractive' apt-get update -y
+DEBIAN_FRONTEND='noninteractive' apt-get install -y nodejs mysql-client nginx awscli
 
 echo ">>>>>>>>>>>>>>>>>>>>>>>>>>"
 echo "Setting variables"
