@@ -1,8 +1,8 @@
 #!/bin/bash
 echo ">>>>>>>>>>>>>>>>>>>>>>>>>>"
-echo "Installing dependencies"
+echo "Version"
 echo ">>>>>>>>>>>>>>>>>>>>>>>>>>"
-echo "Version ${app_version}"
+echo ${app_version}
 echo ">>>>>>>>>>>>>>>>>>>>>>>>>>"
 echo "Installing dependencies"
 echo ">>>>>>>>>>>>>>>>>>>>>>>>>>"
